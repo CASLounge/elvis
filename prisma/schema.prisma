@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String         @id @default(uuid())
+  userName        String         @unique
+  emailAddress    String         @unique
+  password        String
+  branch          String
+  course          String
+  gender          String
+  firstName       String?
+  lastName        String?
+  address         String?
+  createdAt       DateTime       @default(now())
+  lastActive      DateTime       @default(now())
+  verified        Boolean        @default(false)
+  userType        UserType       @default(STUDENT)
+  posts           Post[]
+  profile         UserProfile?
+  tokens          Tokens?
+}
+
+model UserProfile {
+  id          String      @id @default(uuid())
+  bio         String?
+  user        User        @relation(fields: [userId], references: [id])
+  avatarRef   String?
+  bannerRef   String?
+  userId      String      @unique
+}
+
+model Post {
+  id          String        @id @default(uuid())
+  title       String
+  content     String
+  mediaRef    String?
+  published   Boolean       @default(false)
+  author      User          @relation(fields: [authorId], references: [id])
+  authorId    String
+  createdAt   DateTime      @default(now())
+}
+
+model Tokens {
+  id            String      @id @default(uuid())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        String      @unique
+  accessToken   String?     @unique
+  refreshToken  String?     @unique
+}
+
+enum UserType {
+  STUDENT
+  MOD
+  ADMIN
+}
+
+// TODO: Community Pages
+// model Community {
+//   id String @id @default(uuid())
+// }
