@@ -16,7 +16,8 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "tsc",
+    "heroku-postbuild": "yarn prisma migrate dev && yarn build",
+    "start": "nodemon",
     "build": "tsc",
     "prettier": "prettier --config .prettierrc.json --write src/**/*.ts",
     "test": "jest --watch",
