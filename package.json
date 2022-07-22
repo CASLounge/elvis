@@ -16,7 +16,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "nodemon",
+    "start": "tsc",
     "build": "tsc",
     "prettier": "prettier --config .prettierrc.json --write src/**/*.ts",
     "test": "jest --watch",
