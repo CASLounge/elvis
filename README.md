@@ -8,7 +8,7 @@
   <h3 align="center">CASLounge API</h3>
 
   <p align="center">
-    Backend application responsible for CASLounge via Web API's.
+    Backend service responsible for CASLounge via Web API's.
     <br />
     <br />
     <a href="">Demo not available</a>
