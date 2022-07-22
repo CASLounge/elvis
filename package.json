@@ -12,9 +12,7 @@
     "prisma",
     "express"
   ],
-  "engines": {
-    "node": "16.x"
-  },
+  "engines": {},
   "scripts": {
     "heroku-postbuild": "yarn prisma migrate deploy && yarn build",
     "start": "nodemon",
