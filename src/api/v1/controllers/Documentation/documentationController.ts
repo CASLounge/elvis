@@ -26,7 +26,7 @@ documentationController.get('/', async (req: Request, res: Response, next: NextF
     <body>
       <section class="text-gray-600 body-font">
         <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://lh3.googleusercontent.com/MBcWDmFrCYzNE9Xxob11fJIen7893cfztMfN7OeN87uIVG8cliTxrDFkouGpWHe5V_P2H_rrHb_evQ=w1919-h951">
+          <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://scontent.xx.fbcdn.net/v/t1.15752-9/293344963_391042409683924_1395847345863600450_n.png?_nc_cat=109&ccb=1-7&_nc_sid=aee45a&_nc_eui2=AeE8G3Yg4C7Qb3jMEI1v1dDV-020Acl2A1X7TbQByXYDVcfJjiERTT6MdnwzzdYKhmAPstPSy501EMFADmXsMutN&_nc_ohc=8_LsuExpIX8AX8aJ04F&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVIhtFGG2TDrMZKZD_Mwisro8aHyluVrSyA4QluBGaUvJg&oe=62FEFC2E">
           <div class="text-center lg:w-2/3 w-full">
             <h1 class="title-font sm:text-4xl text-3xl mb-4 font-bold text-main">CASLounge API v1 🎉</h1>
             <p class="mb-8 leading-relaxed">Backend service responsible for CASLounge via Web API's.</p>
