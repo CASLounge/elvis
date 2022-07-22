@@ -3,6 +3,8 @@ import { app } from './api/v1/app'
 
 dotenv.config()
 
-const port = process.env.SERVER_PORT || 3000
+const port = process.env.PORT || 3001
 
-app.listen(port, () => console.log(`CASLounge API is listening on port: ${port}`))
+app.listen(port, '0.0.0.0', () => {
+  console.log('Server is running.')
+})
