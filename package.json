@@ -15,7 +15,7 @@
   "engines": {},
   "scripts": {
     "heroku-postbuild": "yarn prisma migrate deploy && yarn build",
-    "start": "nodemon",
+    "start": "node ./dist/index.js",
     "build": "tsc",
     "prettier": "prettier --config .prettierrc.json --write src/**/*.ts",
     "test": "jest --watch",
