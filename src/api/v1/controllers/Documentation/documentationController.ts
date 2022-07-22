@@ -31,7 +31,7 @@ documentationController.get('/', async (req: Request, res: Response, next: NextF
             <h1 class="title-font sm:text-4xl text-3xl mb-4 font-bold text-main">CASLounge API v1 🎉</h1>
             <p class="mb-8 leading-relaxed">Backend service responsible for CASLounge via Web API's.</p>
             <div class="flex justify-center">
-            <a class="inline-flex text-white bg-main border-0 py-2 px-6 focus:outline-none hover:bg-accent rounded text-lg" href="http://localhost:3000/api/v1/documentation">Get Started</a>
+            <a class="inline-flex text-white bg-main border-0 py-2 px-6 focus:outline-none hover:bg-accent rounded text-lg" href="/api/v1/documentation">Get Started</a>
             </div>
           </div>
         </div>
