@@ -6,3 +6,5 @@ dotenv.config()
 const port = process.env.SERVER_PORT || 3000
 
 app.listen(port, () => console.log(`CASLounge API is listening on port: ${port}`))
+
+module.exports = app
