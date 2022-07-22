@@ -12,6 +12,9 @@
     "prisma",
     "express"
   ],
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "nodemon",
     "build": "tsc",
