@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_DEV")
 }
 
 model User {
@@ -23,6 +23,8 @@ model User {
   verified        Boolean        @default(false)
   userType        UserType       @default(STUDENT)
   posts           Post[]
+  comments        Comment[]
+  community       Community?
   profile         UserProfile?
   tokens          Tokens?
 }
@@ -36,8 +38,20 @@ model UserProfile {
   userId      String      @unique
 }
 
+model Comment {
+  id          String        @id @default(uuid())
+  likes       Int           @default(0)
+  content     String
+  author      User          @relation(fields: [authorId], references: [id])
+  authorId    String
+  repliedTo   String
+  parentId    String?
+  createdAt   DateTime      @default(now())
+}
+
 model Post {
   id          String        @id @default(uuid())
+  likes       Int           @default(0)
   title       String
   content     String
   mediaRef    String?
@@ -48,11 +62,19 @@ model Post {
 }
 
 model Tokens {
+  id            String        @id @default(uuid())
+  user          User          @relation(fields: [userId], references: [id])
+  userId        String        @unique
+  accessToken   String?       @unique
+  refreshToken  String?       @unique
+  createdAt     DateTime      @default(now())
+}
+
+model Community {
   id            String      @id @default(uuid())
+  title         String
   user          User        @relation(fields: [userId], references: [id])
   userId        String      @unique
-  accessToken   String?     @unique
-  refreshToken  String?     @unique
 }
 
 enum UserType {
@@ -60,8 +82,3 @@ enum UserType {
   MOD
   ADMIN
 }
-
-// TODO: Community Pages
-// model Community {
-//   id String @id @default(uuid())
-// }

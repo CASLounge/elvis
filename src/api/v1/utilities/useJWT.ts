@@ -14,7 +14,6 @@ export const useJWT = () => {
       `${process.env.ACCESS_TOKEN}`,
       (error, decoded) => {
         if (error) { return res.sendStatus(403) }
-        // ? decoded.userName is not detected yet, ignored!
         // @ts-ignore
         req.user = decoded.userName
         next()

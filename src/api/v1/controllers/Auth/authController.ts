@@ -10,27 +10,34 @@ export const authController: Router = Router()
 
 const { signInValidation } = useValidation()
 
-/***
- * ? Auth - Sign In endpoint
- * Allows registered user to access their account by receiving an access token
- * ? What happens:
- * First this controller validates the received input from the request
- * The ORM then proceeds to query a search to find the user through the inputted email
- * If the ORM does not finds an existing user by the passed email it will return
- * a 400 status error with a message saying user with that email does not exist
- * If the ORM finds a user with the passed email it will return:
- * The user's id, username, and password
- * It will then proceed to validate the password by comparing the passed password
- * and the returned password from the ORM query
- * If the validation fails it will return a 401 status saying wrong password,
- * if the validation succeeds it will generate 2 tokens:
- * 1. Access token that will expire within 6 hour and
- * 2. a Refresh token that will expire within a day
- * The ORM then proceeds to update the tokens table inserting the following:
- * 1. user id from the ORM search query
- * 2. access token
- * 3. refresh token
- */
+/*
+  ? AuthController - Sign In endpoint
+  * Allows registered user to access their account by receiving an access token
+  ? What happens:
+  * First this controller validates the received input from the request
+  *
+  * The ORM then proceeds to query a search to find the user through the inputted email
+  * If the ORM does not finds an existing user by the passed email it will return
+  * a 400 status error with a message saying user with that email does not exist
+  * If the ORM finds a user with the passed email it will return:
+  * The user's id, username, and password
+  *
+  * It will then proceed to validate the password by comparing the passed password
+  * and the returned password from the ORM query
+  * If the validation fails it will return a 401 status with JSON response saying wrong password,
+  * if the validation succeeds it will generate 2 tokens:
+  * 1. Access token that will expire within 6 hour and
+  * 2. a Refresh token that will expire within a day
+  *
+  * The ORM then proceeds to update the tokens table inserting the following:
+  * 1. user id from the ORM search query
+  * 2. access token
+  * 3. refresh token
+  * then the controller finally will send a JSON response containing the following:
+  * 1. error status
+  * 2. response message
+  * 3. accessToken
+*/
 authController.post('/signin', signInValidation, async (req: Request, res: Response, next: NextFunction) => {
   try {
     const errors = validationResult(req)

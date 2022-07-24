@@ -25,7 +25,6 @@ tokenController.get('/refresh', async (req: Request, res: Response, next: NextFu
       `${getUserByRefreshToken.refreshToken}`,
       `${process.env.REFRESH_TOKEN}`,
       (error, decoded) => {
-        // ? decoded.userName is not detected yet, ignored!
         // @ts-ignore
         if (error || getUserByRefreshToken.user.userName !== decoded.userName) {
           console.log('Error on verifying the token')
