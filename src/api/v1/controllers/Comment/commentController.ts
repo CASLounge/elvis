@@ -7,6 +7,15 @@ const { verify } = useJWT()
 
 // TODO:
 // Like comment
+commentController.get('/reply', verify, async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    res.status(200).send({ data: 'comments working 🥳' })
+  } catch (error) {
+    next(error)
+  }
+})
+
+// Like comment
 commentController.get('/like', verify, async (req: Request, res: Response, next: NextFunction) => {
   try {
     res.status(200).send({ data: 'comments working 🥳' })
@@ -14,6 +23,7 @@ commentController.get('/like', verify, async (req: Request, res: Response, next:
     next(error)
   }
 })
+
 // New comment
 commentController.get('/new', verify, async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -22,6 +32,7 @@ commentController.get('/new', verify, async (req: Request, res: Response, next: 
     next(error)
   }
 })
+
 // Delete comment
 commentController.get('/delete', verify, async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -30,6 +41,7 @@ commentController.get('/delete', verify, async (req: Request, res: Response, nex
     next(error)
   }
 })
+
 // Edit comment
 commentController.get('/edit', verify, async (req: Request, res: Response, next: NextFunction) => {
   try {
