@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response, Router } from 'express'
-import { request } from 'http'
 export const documentationController: Router = Router()
 
 documentationController.get('/', async (req: Request, res: Response, next: NextFunction) => {
@@ -10,7 +9,7 @@ documentationController.get('/', async (req: Request, res: Response, next: NextF
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="icon" href="https://scontent.xx.fbcdn.net/v/t1.15752-9/293160987_579664783773628_3788364115782544891_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=aee45a&_nc_eui2=AeEWfqCEJtjkk2qhGINLBngPJBa9vcVib7gkFr29xWJvuNvklZRLbAVXC4s_d9FPmBo4eOMz_fFrYdXssgUKe5Ae&_nc_ohc=636Hj3OPJs0AX_3sHUv&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVL1A45vbnx5SrtXCfAdbxqDHmW9n7Z4IC4urHhcHOz_Gw&oe=62FEACF4">
+      <link rel="icon" href="https://scontent.xx.fbcdn.net/v/t1.15752-9/293139154_789443618750353_5472249647598903685_n.png?stp=cp0_dst-png&_nc_cat=111&ccb=1-7&_nc_sid=aee45a&_nc_eui2=AeH5PR08YPWRCtz5K5vfuy9_2YrQ5cd0yDTZitDlx3TINJpGy47MlCiibfSgtDCDe5D5iSduH1Qj7qP8PWEuztCt&_nc_ohc=VNOJ-Em50AUAX-Se7fc&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVIFv55lr4DkQR1R_J3s1Uj3v7SYQ-0JkJGWb9iLcX4mbg&oe=6300DC09">
       <script src="https://cdn.tailwindcss.com"></script>
       <script>
         tailwind.config = {
@@ -54,7 +53,7 @@ documentationController.get('/documentation', async (req: Request, res: Response
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="icon" href="https://scontent.xx.fbcdn.net/v/t1.15752-9/293160987_579664783773628_3788364115782544891_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=aee45a&_nc_eui2=AeEWfqCEJtjkk2qhGINLBngPJBa9vcVib7gkFr29xWJvuNvklZRLbAVXC4s_d9FPmBo4eOMz_fFrYdXssgUKe5Ae&_nc_ohc=636Hj3OPJs0AX_3sHUv&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVL1A45vbnx5SrtXCfAdbxqDHmW9n7Z4IC4urHhcHOz_Gw&oe=62FEACF4">
+      <link rel="icon" href="https://scontent.xx.fbcdn.net/v/t1.15752-9/293139154_789443618750353_5472249647598903685_n.png?stp=cp0_dst-png&_nc_cat=111&ccb=1-7&_nc_sid=aee45a&_nc_eui2=AeH5PR08YPWRCtz5K5vfuy9_2YrQ5cd0yDTZitDlx3TINJpGy47MlCiibfSgtDCDe5D5iSduH1Qj7qP8PWEuztCt&_nc_ohc=VNOJ-Em50AUAX-Se7fc&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVIFv55lr4DkQR1R_J3s1Uj3v7SYQ-0JkJGWb9iLcX4mbg&oe=6300DC09">
       <script src="https://cdn.tailwindcss.com"></script>
       <script>
         tailwind.config = {
