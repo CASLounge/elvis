@@ -22,8 +22,8 @@ model User {
   lastActive      DateTime          @default(now())
   verified        Boolean           @default(false)
   userType        UserType          @default(STUDENT)
-  community       Community         @relation(fields: [communityId], references: [id])
-  communityId     String            @unique
+  community       Community?         @relation(fields: [communityId], references: [id])
+  communityId     String?            @unique
   posts           Post[]
   comments        Comment[]
   profile         UserProfile?
