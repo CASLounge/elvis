@@ -13,8 +13,6 @@ const { signInValidation } = useValidation()
 /*
   ? AuthController - Sign In endpoint
   * Allows registered user to access their account by receiving an access token
-  *
-  *
 */
 authController.post('/signin', signInValidation, async (req: Request, res: Response, next: NextFunction) => {
   try {
