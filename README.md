@@ -11,7 +11,7 @@
     Backend service responsible for CASLounge via Web API's.
     <br />
     <br />
-    <a href="">Demo not available</a>
+    <a href="https://caslounge-api.herokuapp.com/">Demo available</a>
     ·
     <a href="https://github.com/lozanasc-projects/CASLounge/issues">Report Bug</a>
     ·
