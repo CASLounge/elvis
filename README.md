@@ -49,7 +49,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Backend application that handles database queries and authentication for CASLounge applications
+Backend service that handles database queries and authentication for CASLounge applications
 
 ### Built With
 
