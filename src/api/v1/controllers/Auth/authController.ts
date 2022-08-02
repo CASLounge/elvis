@@ -107,14 +107,19 @@ authController.post('/signin', signInValidation, async (req: Request, res: Respo
 */
 authController.get('/signout', async (req: Request, res: Response, next: NextFunction) => {
   try {
+    // ? Requires userId passed as query and
+    // ? httpOnly cookie containing the jwt token
     const userId: any = req.query.userId
     const cookies = req.cookies
 
+    // ? If no cookie found status 403 is sent
     if (!cookies.jwt) {
       console.log('Error no cookie found')
       return res.sendStatus(403)
     }
-
+    // ? If cookie is found the token will be used to verify token in the database
+    // ? using the ORM a search query to the tokens table using the userId in the params
+    // ? and will return the user's saved refreshToken in the database
     const tokenToInvalidate = cookies.jwt
     const verifyToken = await prisma.tokens.findUnique({
       where: {
@@ -125,15 +130,22 @@ authController.get('/signout', async (req: Request, res: Response, next: NextFun
       }
     })
 
+    // ? If the user is not found 403 is sent
     if (!verifyToken) {
       return res.sendStatus(403)
     }
 
+    // ? If user is found we verify if the current token from the cookie is the same
+    // ? in the saved refreshToken in the database
     if (!verifyToken?.refreshToken === tokenToInvalidate) {
+      // ? If the current refreshToken and the token in the database are not the same
+      // ? we invalidate the current refreshToken by clearing the cookie and send 204 status
       res.clearCookie('jwt', { httpOnly: true })
       return res.sendStatus(204)
     }
 
+    // ? Then an ORM query to update the tokens table is done
+    // ? updating all the token values to null
     const updateToken = await prisma.tokens.update({
       where: {
         userId: userId
@@ -144,6 +156,8 @@ authController.get('/signout', async (req: Request, res: Response, next: NextFun
       }
     })
 
+    // ? If the ORM query to update the tokens table is successful
+    // ? If invalidate the current refreshToken and send 204 status
     if (updateToken) {
       res.clearCookie('jwt', { httpOnly: true })
       return res.sendStatus(204)
