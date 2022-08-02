@@ -24,8 +24,7 @@ tokenController.get('/refresh', async (req: Request, res: Response, next: NextFu
     jwt.verify(
       `${getUserByRefreshToken.refreshToken}`,
       `${process.env.REFRESH_TOKEN}`,
-      (error, decoded) => {
-        // ? decoded.userName is not detected yet, ignored!
+      async (error, decoded) => {
         // @ts-ignore
         if (error || getUserByRefreshToken.user.userName !== decoded.userName) {
           console.log('Error on verifying the token')
@@ -35,9 +34,21 @@ tokenController.get('/refresh', async (req: Request, res: Response, next: NextFu
           // @ts-ignore
           { userName: decoded.userName },
           `${process.env.ACCESS_TOKEN}`,
-          { expiresIn: '8h' }
+          { expiresIn: '1h' }
         )
-        res.status(200).send({ data: { error: false, message: 'RefreshToken is verified 🎉', accessToken: accessToken } })
+        const updateAccessToken = await prisma.tokens.update({
+          where: {
+            userId: getUserByRefreshToken.user.id
+          },
+          data: {
+            accessToken: accessToken
+          }
+        })
+        if (updateAccessToken) {
+          res.status(200).send({ data: { error: false, message: 'RefreshToken is verified 🎉', accessToken: accessToken } })
+        } else {
+          console.error('Something went wrong!')
+        }
       }
     )
   } catch (error) {

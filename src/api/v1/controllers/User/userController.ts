@@ -52,7 +52,8 @@ userController.post('/signup', signUpValidation, async (req: Request, res: Respo
         },
         tokens: {
           create: {}
-        }
+        },
+        community: {}
       }
     })
 
