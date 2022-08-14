@@ -52,8 +52,7 @@ userController.post('/signup', signUpValidation, async (req: Request, res: Respo
         },
         tokens: {
           create: {}
-        },
-        community: {}
+        }
       }
     })
 
@@ -64,8 +63,7 @@ userController.post('/signup', signUpValidation, async (req: Request, res: Respo
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       switch (error.code) {
         case 'P2002':
-          // @ts-ignore
-          res.status(400).send({ data: { error: true, message: `Sorry but ${error.meta.target} is already taken.` } })
+          res.status(400).send({ data: { error: true, message: `Sorry but ${error?.meta?.target!} is already taken.` } })
           break
 
         default:

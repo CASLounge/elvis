@@ -1,6 +1,7 @@
 import { Application, Router, Request, Response, NextFunction } from 'express'
 import {
   authController,
+  authSocialController,
   tokenController,
   userController,
   communityController,
@@ -11,6 +12,7 @@ import {
 
 const _routes: [string, Router][] = [
   ['/auth', authController],
+  ['/auth/social', authSocialController],
   ['/token', tokenController],
   ['/user', userController],
   ['/community', communityController],
