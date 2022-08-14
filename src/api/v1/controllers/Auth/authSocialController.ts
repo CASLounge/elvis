@@ -9,8 +9,6 @@ import { useHash } from '../../utilities/useHash'
 
 export const authSocialController: Router = Router()
 
-const isDevEnv: boolean = process.env.APP_ENV === 'Development'
-
 // ? GOOGLE SOCIAL PROVIDER VERIFIER
 const verifyGoogleAccount = async (accessToken: string, refreshToken: string, profile: GoogleProfile, callback: VerifyCallback): Promise<void> => {
   try {
@@ -185,7 +183,7 @@ authSocialController.get('/signin/google', passport.authenticate('google', { ses
 authSocialController.get('/redirect/google',
   passport.authenticate('google',
     {
-      failureRedirect: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/error`,
+      failureRedirect: '/error',
       failureMessage: true,
       session: false
     }),
@@ -227,7 +225,7 @@ authSocialController.get('/signin/facebook', passport.authenticate('facebook', {
 authSocialController.get('/redirect/facebook',
   passport.authenticate('facebook',
     {
-      failureRedirect: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/error`,
+      failureRedirect: '/error',
       failureMessage: true,
       session: false
     }),
