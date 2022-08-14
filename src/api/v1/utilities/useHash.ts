@@ -1,8 +1,9 @@
+import crypto from 'crypto'
 import bcrypt from 'bcrypt'
 
 export const useHash = () => {
   // Hashes the password using the bcrypt library
-  const hashPassword = async (password: string, saltRounds: number = 10) => {
+  const hashPassword = async (password: string, saltRounds: number = 10): Promise<string | null> => {
     try {
       const salt = await bcrypt.genSalt(saltRounds)
       const hashedPassword = await bcrypt.hash(password, salt)
@@ -13,19 +14,23 @@ export const useHash = () => {
 
     return null
   }
-  // Compares bare string password to hashes password
+  // Compares bare string password to hashed password
   const comparePassword = async (password: string, hash: string) => {
     try {
       return await bcrypt.compare(password, hash)
     } catch (error) {
       console.error(error)
+      return false
     }
+  }
 
-    return false
+  const generatePassword = (): string => {
+    return crypto.randomBytes(10).toString('hex')
   }
 
   return {
     hashPassword,
-    comparePassword
+    comparePassword,
+    generatePassword
   }
 }
