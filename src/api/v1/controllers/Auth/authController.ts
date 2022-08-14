@@ -12,7 +12,7 @@ const { signInValidation } = useValidation()
 
 /*
   ? AuthController - Sign In endpoint
-  * Allows registered user to access their account by receiving an access token
+  * Allows registered user to access their account using email and password and by receiving an access token
 */
 authController.post('/signin', signInValidation, async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -40,6 +40,18 @@ authController.post('/signin', signInValidation, async (req: Request, res: Respo
         password: true
       }
     })
+
+    const checkSocial = await prisma.socialCredentials.findUnique({
+      where: {
+        userId: getUserByEmail?.id
+      }
+    })
+
+    if (checkSocial) {
+      res.status(400).send({ data: { error: true, message: 'Invalid signin!' } })
+      return
+    }
+
     // ? If the ORM does not finds an existing user by the passed email it will return
     // ? a 400 status error with a message saying user with that email is not found
     if (!getUserByEmail) {
@@ -48,7 +60,7 @@ authController.post('/signin', signInValidation, async (req: Request, res: Respo
     } else {
       // ? It will then proceed to validate the password by comparing the passed password
       // ? and the returned password from the ORM query
-      const validate = await comparePassword(password, getUserByEmail.password)
+      const validate = await comparePassword(password, getUserByEmail?.password || '')
 
       // ? If the validation fails it will return a 401 status with JSON response saying wrong password,
       if (!validate) {
@@ -65,8 +77,7 @@ authController.post('/signin', signInValidation, async (req: Request, res: Respo
         )
         const refreshToken = jwt.sign(
           { userName: getUserByEmail.userName },
-          // @ts-ignore
-          `${process.env.REFRESH_TOKEN}`,
+          `${process.env.REFRESH_TOKEN!}`,
           { expiresIn: '1d' }
         )
         // ? The ORM then proceeds to update the tokens table inserting the following:
