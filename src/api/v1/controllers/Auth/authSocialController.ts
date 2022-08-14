@@ -168,14 +168,14 @@ const verifyFacebookAccount = async (accessToken: string, refreshToken: string, 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID || '',
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-  callbackURL: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/redirect/google`,
+  callbackURL: 'https://caslounge-api.herokuapp.com/api/v1/auth/social/redirect/google',
   scope: ['profile', 'email']
 }, verifyGoogleAccount))
 // * FACEBOOK
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID || '',
   clientSecret: process.env.FACEBOOK_APP_SECRET || '',
-  callbackURL: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/redirect/facebook`,
+  callbackURL: 'https://caslounge-api.herokuapp.com/api/v1/auth/social/redirect/facebook',
   profileFields: ['id', 'displayName', 'email', 'first_name', 'last_name']
 }, verifyFacebookAccount))
 
