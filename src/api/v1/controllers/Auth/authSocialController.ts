@@ -183,7 +183,7 @@ authSocialController.get('/signin/google', passport.authenticate('google', { ses
 authSocialController.get('/redirect/google',
   passport.authenticate('google',
     {
-      failureRedirect: '/error',
+      failureRedirect: 'https://caslounge-api.herokuapp.com/api/v1/auth/social/error',
       failureMessage: true,
       session: false
     }),
@@ -225,7 +225,7 @@ authSocialController.get('/signin/facebook', passport.authenticate('facebook', {
 authSocialController.get('/redirect/facebook',
   passport.authenticate('facebook',
     {
-      failureRedirect: '/error',
+      failureRedirect: 'https://caslounge-api.herokuapp.com/api/v1/auth/social/error',
       failureMessage: true,
       session: false
     }),
