@@ -4,30 +4,32 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_DEV")
 }
 
 model User {
-  id              String            @id @default(uuid())
-  userName        String            @unique
-  emailAddress    String            @unique
-  password        String
-  branch          String
-  course          String
-  gender          String
-  firstName       String?
-  lastName        String?
-  address         String?
-  createdAt       DateTime          @default(now())
-  lastActive      DateTime          @default(now())
-  verified        Boolean           @default(false)
-  userType        UserType          @default(STUDENT)
-  community       Community?         @relation(fields: [communityId], references: [id])
-  communityId     String?            @unique
-  posts           Post[]
-  comments        Comment[]
-  profile         UserProfile?
-  tokens          Tokens?
+  id                String              @id @default(uuid())
+  userName          String?             @unique
+  emailAddress      String              @unique
+  password          String
+  branch            String?
+  course            String?
+  gender            String?
+  firstName         String?
+  lastName          String?
+  address           String?
+  profileImageUrl   String?
+  createdAt         DateTime            @default(now())
+  lastActive        DateTime            @default(now())
+  verified          Boolean             @default(false)
+  userType          UserType            @default(STUDENT)
+  community         Community?          @relation(fields: [communityId], references: [id])
+  communityId       String?             @unique
+  posts             Post[]
+  comments          Comment[]
+  profile           UserProfile?
+  tokens            Tokens?
+  social            SocialCredentials?
 }
 
 model UserProfile {
@@ -75,6 +77,13 @@ model Community {
   title         String
   verified      Boolean     @default(false)
   members       User[]
+}
+
+model SocialCredentials {
+  provider      String
+  providerId    String
+  userId        String        @unique
+  user          User          @relation(fields: [userId], references: [id])
 }
 
 enum UserType {
