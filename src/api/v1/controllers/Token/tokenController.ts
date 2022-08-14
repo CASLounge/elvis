@@ -26,13 +26,13 @@ tokenController.get('/refresh', async (req: Request, res: Response, next: NextFu
       `${process.env.REFRESH_TOKEN}`,
       async (error, decoded) => {
         // @ts-ignore
-        if (error || getUserByRefreshToken.user.userName !== decoded.userName) {
+        if (error || getUserByRefreshToken.user.userName !== decoded?.userName) {
           console.log('Error on verifying the token')
           return res.sendStatus(401)
         }
         const accessToken = jwt.sign(
           // @ts-ignore
-          { userName: decoded.userName },
+          { userName: decoded?.userName },
           `${process.env.ACCESS_TOKEN}`,
           { expiresIn: '1h' }
         )
