@@ -9,8 +9,6 @@ import { useHash } from '../../utilities/useHash'
 
 export const authSocialController: Router = Router()
 
-const isDevEnv: boolean = process.env.APP_ENV === 'Development'
-
 // ? GOOGLE SOCIAL PROVIDER VERIFIER
 const verifyGoogleAccount = async (accessToken: string, refreshToken: string, profile: GoogleProfile, callback: VerifyCallback): Promise<void> => {
   try {
@@ -111,8 +109,8 @@ const verifyFacebookAccount = async (accessToken: string, refreshToken: string, 
           userName: profile?.username || null,
           password: encryptedPassword,
           emailAddress: profile?._json?.email!,
-          firstName: profile?._json?.given_name,
-          lastName: profile?._json?.family_name,
+          firstName: profile?._json?.first_name,
+          lastName: profile?._json?.last_name,
           profileImageUrl: profile?._json?.picture,
           profile: {
             create: {
@@ -168,14 +166,14 @@ const verifyFacebookAccount = async (accessToken: string, refreshToken: string, 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID || '',
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-  callbackURL: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/redirect/google`,
+  callbackURL: `${process.env.BASE_URI_DEV}/auth/social/redirect/google`,
   scope: ['profile', 'email']
 }, verifyGoogleAccount))
 // * FACEBOOK
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID || '',
   clientSecret: process.env.FACEBOOK_APP_SECRET || '',
-  callbackURL: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/redirect/facebook`,
+  callbackURL: `${process.env.BASE_URI_DEV}/auth/social/redirect/facebook`,
   profileFields: ['id', 'displayName', 'email', 'first_name', 'last_name']
 }, verifyFacebookAccount))
 
@@ -185,7 +183,7 @@ authSocialController.get('/signin/google', passport.authenticate('google', { ses
 authSocialController.get('/redirect/google',
   passport.authenticate('google',
     {
-      failureRedirect: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/error`,
+      failureRedirect: `${process.env.BASE_URI_DEV}/auth/social/error`,
       failureMessage: true,
       session: false
     }),
@@ -227,7 +225,7 @@ authSocialController.get('/signin/facebook', passport.authenticate('facebook', {
 authSocialController.get('/redirect/facebook',
   passport.authenticate('facebook',
     {
-      failureRedirect: `${isDevEnv ? process.env.BASE_URI : process.env.BASE_URI_DEV}/auth/social/error`,
+      failureRedirect: `${process.env.BASE_URI_DEV}/auth/social/error`,
       failureMessage: true,
       session: false
     }),
