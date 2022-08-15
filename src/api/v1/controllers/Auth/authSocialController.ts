@@ -166,14 +166,14 @@ const verifyFacebookAccount = async (accessToken: string, refreshToken: string, 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID || '',
   clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-  callbackURL: `${process.env.BASE_URI_DEV}/auth/social/redirect/google`,
+  callbackURL: `${process.env.BASE_URI}/auth/social/redirect/google`,
   scope: ['profile', 'email']
 }, verifyGoogleAccount))
 // * FACEBOOK
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID || '',
   clientSecret: process.env.FACEBOOK_APP_SECRET || '',
-  callbackURL: `${process.env.BASE_URI_DEV}/auth/social/redirect/facebook`,
+  callbackURL: `${process.env.BASE_URI}/auth/social/redirect/facebook`,
   profileFields: ['id', 'displayName', 'email', 'first_name', 'last_name']
 }, verifyFacebookAccount))
 
@@ -183,7 +183,7 @@ authSocialController.get('/signin/google', passport.authenticate('google', { ses
 authSocialController.get('/redirect/google',
   passport.authenticate('google',
     {
-      failureRedirect: `${process.env.BASE_URI_DEV}/auth/social/error`,
+      failureRedirect: `${process.env.BASE_URI}/auth/social/error`,
       failureMessage: true,
       session: false
     }),
@@ -225,7 +225,7 @@ authSocialController.get('/signin/facebook', passport.authenticate('facebook', {
 authSocialController.get('/redirect/facebook',
   passport.authenticate('facebook',
     {
-      failureRedirect: `${process.env.BASE_URI_DEV}/auth/social/error`,
+      failureRedirect: `${process.env.BASE_URI}/auth/social/error`,
       failureMessage: true,
       session: false
     }),
