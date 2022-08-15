@@ -21,7 +21,9 @@ export const useJWT = () => {
           return res.sendStatus(403)
         }
         // @ts-ignore
-        req.user = decoded.userName
+        req.user = decoded.UserInfo.userName
+        // @ts-ignore
+        req.userType = decoded.UserInfo.userType
         next()
       }
     )

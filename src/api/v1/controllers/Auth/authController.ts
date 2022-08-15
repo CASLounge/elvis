@@ -37,7 +37,8 @@ authController.post('/signin', signInValidation, async (req: Request, res: Respo
       select: {
         id: true,
         userName: true,
-        password: true
+        password: true,
+        userType: true
       }
     })
 
@@ -71,7 +72,13 @@ authController.post('/signin', signInValidation, async (req: Request, res: Respo
         // ? 1. Access token that will expire within 6 hour and
         // ? 2. a Refresh token that will expire within a day
         const accessToken = jwt.sign(
-          { userName: getUserByEmail.userName },
+          {
+            UserInfo:
+            {
+              userName: getUserByEmail.userName,
+              userType: getUserByEmail.userType
+            }
+          },
           `${process.env.ACCESS_TOKEN}`,
           { expiresIn: '1h' }
         )
