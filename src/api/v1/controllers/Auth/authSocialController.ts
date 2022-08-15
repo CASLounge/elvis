@@ -189,8 +189,14 @@ authSocialController.get('/redirect/google',
     }),
   async (req, res) => {
     const accessToken = jwt.sign(
-      // @ts-ignore
-      { userName: req?.user?.userName || req?.user?.emailAddress },
+      {
+        UserInfo: {
+          // @ts-ignore
+          userName: req?.user?.userName || req?.user?.emailAddress,
+          // @ts-ignore
+          userType: req?.user?.userType
+        }
+      },
       `${process.env.ACCESS_TOKEN}`,
       { expiresIn: '1h' }
     )
@@ -231,8 +237,14 @@ authSocialController.get('/redirect/facebook',
     }),
   async (req, res) => {
     const accessToken = jwt.sign(
-      // @ts-ignore
-      { userName: req?.user?.userName || req?.user?.emailAddress },
+      {
+        UserInfo: {
+          // @ts-ignore
+          userName: req?.user?.userName || req?.user?.emailAddress,
+          // @ts-ignore
+          userType: req?.user?.userType
+        }
+      },
       `${process.env.ACCESS_TOKEN}`,
       { expiresIn: '1h' }
     )
