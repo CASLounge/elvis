@@ -109,8 +109,8 @@ const verifyFacebookAccount = async (accessToken: string, refreshToken: string, 
           userName: profile?.username || null,
           password: encryptedPassword,
           emailAddress: profile?._json?.email!,
-          firstName: profile?._json?.given_name,
-          lastName: profile?._json?.family_name,
+          firstName: profile?._json?.first_name,
+          lastName: profile?._json?.last_name,
           profileImageUrl: profile?._json?.picture,
           profile: {
             create: {
