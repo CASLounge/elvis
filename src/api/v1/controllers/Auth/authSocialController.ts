@@ -35,6 +35,7 @@ const verifyGoogleAccount = async (accessToken: string, refreshToken: string, pr
           firstName: profile?._json?.given_name,
           lastName: profile?._json?.family_name,
           profileImageUrl: profile?._json?.picture,
+          userType: 'TEMP',
           profile: {
             create: {
               avatarRef: profile?._json?.picture
@@ -112,6 +113,7 @@ const verifyFacebookAccount = async (accessToken: string, refreshToken: string, 
           firstName: profile?._json?.first_name,
           lastName: profile?._json?.last_name,
           profileImageUrl: profile?._json?.picture,
+          userType: 'TEMP',
           profile: {
             create: {
               avatarRef: profile?._json?.picture
@@ -188,6 +190,22 @@ authSocialController.get('/redirect/google',
       session: false
     }),
   async (req, res) => {
+    // @ts-ignore
+    if (req?.user?.userType === 'TEMP') {
+      const tempAccessToken = jwt.sign(
+        {
+          UserInfo: {
+            // @ts-ignore
+            userName: req?.user?.userName || req?.user?.emailAddress,
+            // @ts-ignore
+            userType: req?.user?.userType
+          }
+        },
+        `${process.env.ACCESS_TOKEN}`,
+        { expiresIn: '30m' }
+      )
+      return res.status(200).send({ data: { error: false, message: 'Sign in via Google is successful, please complete the signup within 30 minutes!', accessToken: tempAccessToken } })
+    }
     const accessToken = jwt.sign(
       {
         UserInfo: {
@@ -223,7 +241,7 @@ authSocialController.get('/redirect/google',
     // ? 2. response message
     // ? 3. accessToken
     res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'none', secure: process.env.APP_ENV !== 'Development', maxAge: 24 * 60 * 60 * 1000 })
-    res.status(200).send({ data: { error: false, message: 'Sign in via Google is successful', accessToken: accessToken } })
+    res.status(200).send({ data: { error: false, message: 'Sign up via Google is successful', accessToken: accessToken } })
   })
 
 // * FACEBOOK
@@ -236,6 +254,23 @@ authSocialController.get('/redirect/facebook',
       session: false
     }),
   async (req, res) => {
+    // @ts-ignore
+    if (req?.user?.userType === 'TEMP') {
+      const tempAccessToken = jwt.sign(
+        {
+          UserInfo: {
+            // @ts-ignore
+            userName: req?.user?.userName || req?.user?.emailAddress,
+            // @ts-ignore
+            userType: req?.user?.userType
+          }
+        },
+        `${process.env.ACCESS_TOKEN}`,
+        { expiresIn: '30m' }
+      )
+      return res.status(200).send({ data: { error: false, message: 'Sign up via Facebook is successful, please complete the signup within 30 minutes!', accessToken: tempAccessToken } })
+    }
+    // @ts-ignore
     const accessToken = jwt.sign(
       {
         UserInfo: {
