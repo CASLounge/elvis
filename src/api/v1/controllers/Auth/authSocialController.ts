@@ -241,7 +241,7 @@ authSocialController.get('/redirect/google',
     // ? 2. response message
     // ? 3. accessToken
     res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'none', secure: process.env.APP_ENV !== 'Development', maxAge: 24 * 60 * 60 * 1000 })
-    res.status(200).send({ data: { error: false, message: 'Sign in via Google is successful', accessToken: accessToken } })
+    res.status(200).send({ data: { error: false, message: 'Sign up via Google is successful', accessToken: accessToken } })
   })
 
 // * FACEBOOK
@@ -268,7 +268,7 @@ authSocialController.get('/redirect/facebook',
         `${process.env.ACCESS_TOKEN}`,
         { expiresIn: '30m' }
       )
-      return res.status(200).send({ data: { error: false, message: 'Sign in via Google is successful, please complete the signup within 30 minutes!', accessToken: tempAccessToken } })
+      return res.status(200).send({ data: { error: false, message: 'Sign up via Facebook is successful, please complete the signup within 30 minutes!', accessToken: tempAccessToken } })
     }
     // @ts-ignore
     const accessToken = jwt.sign(
