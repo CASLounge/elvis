@@ -12,7 +12,7 @@ model User {
   userName          String?             @unique
   emailAddress      String              @unique
   password          String
-  branch            String?
+  branch            Branch?
   course            String?
   gender            String?
   firstName         String?
@@ -33,12 +33,13 @@ model User {
 }
 
 model UserProfile {
-  id          String      @id @default(uuid())
-  bio         String?
-  user        User        @relation(fields: [userId], references: [id])
-  avatarRef   String?
-  bannerRef   String?
-  userId      String      @unique
+  id            String      @id @default(uuid())
+  bio           String?
+  user          User        @relation(fields: [userId], references: [id])
+  avatarRef     String?
+  bannerRef     String?
+  private       Boolean     @default(false)
+  userId        String      @unique
 }
 
 model Comment {
@@ -91,4 +92,13 @@ enum UserType {
   MOD
   ADMIN
   TEMP
+}
+
+enum Branch {
+  BAIS
+  SIATON
+  BAYAWAN
+  PAMPLONA
+  MC1
+  MC2
 }
