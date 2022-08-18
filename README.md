@@ -57,7 +57,7 @@ This system was built with the following technologies:
 
 * [Prisma](https://www.prisma.io/)
 * [PostgreSQL](https://www.postgresql.org/)
-* [Supabase (PostgreSQL Db Hosting)](https://supabase.com/docs/)
+* [Supabase (PostgreSQL DB Hosting)](https://supabase.com/docs/)
 * [NodeJS](https://nodejs.dev/)  
 
 <!-- GETTING STARTED -->
@@ -88,7 +88,7 @@ Let's start with the prerequisites, make sure you have the following installed i
 
   ```sh
    # Clone the repo
-   git clone https://github.com/lozanasc-projects/CASLounge.git
+   git clone https://github.com/CASLounge/elvis.git
    cd ./caslounge/elvis
    ```  
 
@@ -113,8 +113,7 @@ Let's start with the prerequisites, make sure you have the following installed i
 
 <!-- ROADMAP -->
 ## Roadmap
-
-See the [open issues](https://github.com/lozanasc-projects/CASLounge/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/CASLounge/elvis/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -130,11 +129,11 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the - license. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 ## Contact
 
-Sean Christian Lozana - [@devzana](https://twitter.com/devzana) - lozanasc@gmail.com
+Sean Christian Lozana - [@devzana](https://twitter.com/devzana) - lozanascbusiness@gmail.com
 
-Project Link: [CASLounge](https://github.com/lozanasc-projects/CASLounge)
+Project Link: [CASLounge](https://github.com/CASLounge)
