@@ -75,6 +75,7 @@ authController.post('/signin', signInValidation, async (req: Request, res: Respo
           {
             UserInfo:
             {
+              userId: getUserByEmail.id,
               userName: getUserByEmail.userName,
               userType: getUserByEmail.userType
             }

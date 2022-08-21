@@ -196,6 +196,8 @@ authSocialController.get('/redirect/google',
         {
           UserInfo: {
             // @ts-ignore
+            userId: req?.user?.id,
+            // @ts-ignore
             userName: req?.user?.userName || req?.user?.emailAddress,
             // @ts-ignore
             userType: req?.user?.userType
@@ -209,6 +211,8 @@ authSocialController.get('/redirect/google',
     const accessToken = jwt.sign(
       {
         UserInfo: {
+          // @ts-ignore
+          userId: req?.user?.id,
           // @ts-ignore
           userName: req?.user?.userName || req?.user?.emailAddress,
           // @ts-ignore
@@ -260,6 +264,8 @@ authSocialController.get('/redirect/facebook',
         {
           UserInfo: {
             // @ts-ignore
+            userId: req?.user?.id,
+            // @ts-ignore
             userName: req?.user?.userName || req?.user?.emailAddress,
             // @ts-ignore
             userType: req?.user?.userType
@@ -274,6 +280,8 @@ authSocialController.get('/redirect/facebook',
     const accessToken = jwt.sign(
       {
         UserInfo: {
+          // @ts-ignore
+          userId: req?.user?.id,
           // @ts-ignore
           userName: req?.user?.userName || req?.user?.emailAddress,
           // @ts-ignore

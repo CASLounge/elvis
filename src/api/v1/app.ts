@@ -2,6 +2,7 @@ import express, { Application } from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
+import fileUpload from 'express-fileupload'
 
 import { routes } from './routes'
 import { useCors } from './utilities/useCors'
@@ -10,6 +11,7 @@ export const app: Application = express()
 
 const { options } = useCors()
 
+app.use(fileUpload())
 app.use(cors(options))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

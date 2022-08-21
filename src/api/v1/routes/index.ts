@@ -16,7 +16,7 @@ const _routes: [string, Router][] = [
   ['/token', tokenController],
   ['/user', userController],
   ['/community', communityController],
-  ['/posts', postController],
+  ['/post', postController],
   ['/comment', commentController],
   ['/', documentationController]
 ]
